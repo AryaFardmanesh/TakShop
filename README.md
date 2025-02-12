@@ -4,7 +4,7 @@ TakShop is a university project that was implemented using the following tools:
 
 - PHP
 - SASS
-- JQuery
+- TypeScript
 
 This is a shopping site for selling various products. The payment gateway is connected to this project and it is possible to make payments in a completely real way.
 
