@@ -1,0 +1,51 @@
+{
+	"private": true,
+	"name": "takshop",
+	"version": "0.0.1",
+	"description": "A shopping website implemented with PHP.",
+	"main": "./lib/",
+	"directories": {
+		"lib": "lib"
+	},
+	"scripts": {
+		"build": "gulp",
+		"start": "gulp watch:build",
+		"clean": "gulp clean"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/AryaFardmanesh/TakShop.git"
+	},
+	"keywords": [
+		"php",
+		"website",
+		"online-shop"
+	],
+	"author": {
+		"name": "Arya Fardmanesh",
+		"url": "https://github.com/AryaFardmanesh"
+	},
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/AryaFardmanesh/TakShop/issues"
+	},
+	"homepage": "https://github.com/AryaFardmanesh/TakShop#readme",
+	"devDependencies": {
+		"@babel/core": "^7.26.8",
+		"@babel/preset-env": "^7.26.8",
+		"gulp": "^5.0.0",
+		"gulp-babel": "^8.0.0",
+		"gulp-clean": "^0.4.0",
+		"gulp-sass": "^5.1.0",
+		"gulp-sourcemaps": "^3.0.0",
+		"gulp-terser": "^2.1.0",
+		"gulp-typescript": "^6.0.0-alpha.1",
+		"sass": "^1.84.0",
+		"through2": "^4.0.2",
+		"typescript": "^5.7.3",
+		"webpack-stream": "^7.0.0"
+	},
+	"dependencies": {
+		"@types/jquery": "^3.5.32"
+	}
+}
