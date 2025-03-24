@@ -11,11 +11,15 @@ const terser = require( 'gulp-terser' );
 const config = require( './config' );
 const path = require( 'node:path' );
 
-gulp.task( 'clean', () => gulp.src( [ '!./public/assets/**/*', './public/**/*.css', './public/**/*.js' ], { allowEmpty: true, read: false } )
+gulp.task( 'clean', () => gulp.src( [ '!./public/assets/**/*', './public/**/*.css', './public/**/*.css.map', './public/**/*.js' ], { allowEmpty: true, read: false } )
 	.pipe( clean() )
 );
 
 gulp.task( 'clean:temp', () => gulp.src( [ '!./public/assets/**/*', '!./public/**/main.js', './public/**/*.js' ], { allowEmpty: true, read: false } )
+	.pipe( clean() )
+);
+
+gulp.task( 'clean:scripts:temp', () => gulp.src( './public/scripts/', { allowEmpty: true, read: false } )
 	.pipe( clean() )
 );
 
@@ -61,7 +65,9 @@ gulp.task( 'build:javascript', () => {
 		.pipe( babel( config.babelConfig ) )
 		.pipe( terser( config.terserConfig ) )
 		.pipe( gulp.dest( function ( file ) {
-			return path.parse( file.dirname ).dir;
+			const sep = path.sep;
+			const dirname = file.dirname.replace( `${ sep }scripts${ sep }`, sep );
+			return path.parse( dirname ).dir;
 		} ) )
 } );
 
@@ -69,6 +75,7 @@ module.exports[ 'build:scripts' ] = gulp.series(
 	gulp.task( 'build:typescript' ),
 	gulp.task( 'build:javascript' ),
 	gulp.task( 'clean:temp' ),
+	gulp.task( 'clean:scripts:temp' ),
 );
 
 module.exports.default = gulp.series(
