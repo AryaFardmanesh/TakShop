@@ -1,0 +1,73 @@
+@use "config";
+
+// Add fonts
+@font-face {
+	font-family: vazir;
+	font-weight: 100;
+	src: url("../assets/fonts/Vazir-Thin.ttf");
+}
+
+@font-face {
+	font-family: vazir;
+	font-weight: 200;
+	src: url("../assets/fonts/Vazir-Light.ttf");
+}
+
+@font-face {
+	font-family: vazir;
+	font-weight: 300;
+	src: url("../assets/fonts/Vazir-Medium.ttf");
+}
+
+@font-face {
+	font-family: vazir;
+	font-weight: 400;
+	src: url("../assets/fonts/Vazir.ttf");
+}
+
+@font-face {
+	font-family: vazir;
+	font-weight: 500;
+	src: url("../assets/fonts/Vazir-Bold.ttf");
+}
+
+// Reboot default styles
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	direction: config.$direction;
+	background-color: config.$bg-color;
+	color: config.$text-color-1;
+	font-family: vazir;
+	font-weight: 400;
+}
+
+button {
+	cursor: pointer;
+	font-family: vazir;
+	font-weight: 400;
+}
+
+input, textarea {
+	outline: none;
+	font-size: 14px;
+	font-family: vazir;
+	font-weight: 400;
+}
+
+input::placeholder, textarea::placeholder {
+	font-size: 14px;
+}
+
+a {
+	text-decoration: none;
+	color: config.$link-color;
+	transition: 0.2s;
+}
+
+a:hover {
+	text-decoration: underline;
+}

@@ -2,6 +2,7 @@ const gulp = require( 'gulp' );
 const clean = require( 'gulp-clean' );
 const sass = require( 'gulp-sass' )( require( 'sass' ) );
 const sassSourceMaps = require( 'gulp-sourcemaps' );
+const uglifycss = require( 'gulp-uglifycss' );
 const typescript = require( 'gulp-typescript' );
 const through2 = require( 'through2' );
 const webpack = require( 'webpack-stream' );
@@ -10,28 +11,43 @@ const terser = require( 'gulp-terser' );
 const config = require( './config' );
 const path = require( 'node:path' );
 
-gulp.task( 'clean', () => gulp.src( [ './lib/css/', '!./lib/repo/**/*.js', './lib/**/*.js' ], { allowEmpty: true, read: false } )
+gulp.task( 'clean', () => gulp.src( [ '!./public/assets/**/*', './public/**/*.css', './public/**/*.js' ], { allowEmpty: true, read: false } )
 	.pipe( clean() )
 );
 
-gulp.task( 'clean:temp', () => gulp.src( [ '!./lib/repo/', '!./lib/repo/**/*.js', '!./lib/**/main.js', './lib/**/*.js' ], { allowEmpty: true, read: false } )
+gulp.task( 'clean:temp', () => gulp.src( [ '!./public/assets/**/*', '!./public/**/main.js', './public/**/*.js' ], { allowEmpty: true, read: false } )
 	.pipe( clean() )
 );
 
-gulp.task( 'build:style', () => gulp.src( './styles/main.scss' )
+gulp.task( 'build:style', () => gulp.src( './styles/pages/*.scss' )
 	.pipe( sassSourceMaps.init() )
 	.pipe( sass( config.sassConfig ).on( 'error', sass.logError ) )
 	.pipe( sassSourceMaps.write( './' ) )
-	.pipe( gulp.dest( './lib/css' ) )
+	.pipe( uglifycss() )
+	.pipe( gulp.dest( file => {
+		// Find dir name
+		const targetDirName = file.basename.slice( 0, file.basename.indexOf( '.' ) );
+
+		// Chnage file name to 'main'
+		const basename = file.basename;
+		let dotIndex = basename.indexOf( '.' );
+		dotIndex = ( dotIndex === -1 ) ? basename.length : dotIndex;
+		const filename = basename.slice( 0, dotIndex );
+
+		file.basename = basename.replace( filename, 'main' );
+
+		// Set destination address
+		return `./public/${ targetDirName }/`;
+	} ) )
 );
 
-gulp.task( 'build:typescript', () => gulp.src( './scripts/**/*.ts' )
+gulp.task( 'build:typescript', () => gulp.src( [ '!./scripts/modules/**/*', './scripts/**/*.ts' ] )
 	.pipe( typescript( config.typescriptConfig ) )
-	.pipe( gulp.dest( './lib/' ) )
+	.pipe( gulp.dest( './public/' ) )
 );
 
-gulp.task( 'build:compiledjs', () => {
-	return gulp.src( [ './lib/**/main.js' ] )
+gulp.task( 'build:javascript', () => {
+	return gulp.src( [ '!./public/assets/*', './public/**/main.js' ] )
 		.pipe( through2.obj( ( file, enc, cb ) => {
 			const filePath = file.path;
 			config.webpackConfig.entry = filePath;
@@ -51,14 +67,16 @@ gulp.task( 'build:compiledjs', () => {
 
 module.exports[ 'build:scripts' ] = gulp.series(
 	gulp.task( 'build:typescript' ),
-	gulp.task( 'build:compiledjs' ),
+	gulp.task( 'build:javascript' ),
 	gulp.task( 'clean:temp' ),
 );
 
 module.exports.default = gulp.series(
 	gulp.task( 'clean' ),
-	gulp.task( 'build:style' ),
-	module.exports[ 'build:scripts' ],
+	gulp.parallel(
+		gulp.task( 'build:style' ),
+		module.exports[ 'build:scripts' ],
+	)
 );
 
 module.exports[ 'watch:build' ] = function () {
