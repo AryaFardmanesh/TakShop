@@ -27,6 +27,8 @@
 		<button type="submit">ورود</button>
 
 		<div class="login-form-text-center">اگر حساب کاربری ندارید یکی <a href="./../signup/">ایجاد کنید</a>.</div>
+
+		<!-- <div class="login-form-text-center error">خطلا رمز عبور اشتباه است</div> -->
 	</form>
 
 	<script src="./../assets/repo/jquery-3.7.1.min.js"></script>
