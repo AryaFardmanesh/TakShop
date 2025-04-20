@@ -3,15 +3,46 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" href="./../assets/images/logo/logo.png" type="image/x-icon">
 	<link rel="stylesheet" href="./main.css">
 	<title>Index</title>
 </head>
 <body>
-	<h1>Index page</h1>
+	<nav class="nav">
+		<a href="./" class="active" title="Home">
+			<i class="fa-solid fa-home fa-lg"></i>
+		</a>
+		<!-- <a href="../login/" title="Login">
+			<i class="fa-solid fa-sign-in fa-lg"></i>
+		</a> -->
+		<a href="../profile/" title="Profile">
+			<i class="fa-solid fa-user fa-lg"></i>
+		</a>
+		<a href="../dashboard/" title="Admin Panel">
+			<i class="fa-solid fa-dashboard fa-lg"></i>
+		</a>
+	</nav>
 
-	<p id="demo"></p>
+	<div class="header-box">
+		<h1>به فروشگاه آنلاین تک شاپ خوش آمدید.</h1>
+		<p>
+			در این فروشگاه می توانید محصولات مختلفی را خیلی راحت خریداری کنید و یا حتی اگر محصولی برای فروش دارید آن را در این وبسایت به فروش برسانید.
+		</p>
+	</div>
 
-	<button id="btn">Click me to show the text!</button>
+	<hr />
+
+	<div class="container-products">
+		<div class="container-product">
+			<img src="./../assets/images/logo/logo.png" alt="Product image." />
+			<span class="pro-name">نام محصول</span>
+			<span class="price">
+				<span>1000</span>
+				<span class="badge">تومان</span>
+			</span>
+			<button>مشاهده</button>
+		</div>
+	</div>
 
 	<script src="./main.js"></script>
 </body>
