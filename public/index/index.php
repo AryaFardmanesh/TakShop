@@ -40,7 +40,7 @@
 				<span>1000</span>
 				<span class="badge">تومان</span>
 			</span>
-			<a  href="#">مشاهده</a>
+			<a href="#">مشاهده</a>
 		</div>
 	</div>
 
