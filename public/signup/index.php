@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" href="./../assets/images/logo/logo.png" type="image/x-icon">
 	<link rel="stylesheet" href="./main.css">
-	<title>TakShop - Login</title>
+	<title>TakShop - Sign Up</title>
 </head>
 <body>
 	<form action="#" method="POST" class="login-form">
