@@ -1,0 +1,273 @@
+@use "../reboot";
+@use "../config";
+@use "../mixins";
+@use "../components/navigation";
+
+body {
+	max-width: 1600px;
+	margin: 0 auto;
+}
+
+.container-profile {
+	width: 95%;
+	box-sizing: border-box;
+	padding: 20px;
+	margin: 20px auto;
+	background-color: darken($color: config.$bg-color, $amount: 2.5);
+	border: 1px solid config.$input-border-color;
+	border-radius: 8px;
+	box-shadow: config.$drop-shadow-light;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	.container-profile-avatar-name {
+		margin-bottom: 20px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		row-gap: 10px;
+
+		img {
+			$avatar-size: 60px;
+
+			width: $avatar-size;
+			height: $avatar-size;
+			user-select: none;
+		}
+
+		span {
+			font-size: 14px;
+			font-weight: bold;
+		}
+	}
+
+	.container-info {
+		width: 100%;
+		box-sizing: border-box;
+		padding: 10px;
+		border: 1px solid config.$input-border-color;
+		border-radius: 6px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		div {
+			width: 100%;
+			display: grid;
+			grid-template-columns: repeat(auto-fit, 350px);
+			justify-content: center;
+			gap: 15px;
+
+			div {
+				gap: 0;
+				width: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+
+				label {
+					margin-left: 5px;
+					font-size: 12px;
+					font-weight: bold;
+					user-select: none;
+				}
+
+				input, textarea {
+					width: 80%;
+					margin-right: auto;
+					box-sizing: border-box;
+					padding: 2px 5px;
+					resize: none;
+				}
+
+				span {
+					margin-left: auto;
+					padding: 2px 8px;
+					font-size: 12px;
+					color: config.$white;
+					background-color: config.$primary-color;
+					border-radius: 100px;
+					user-select: none;
+				}
+			}
+		}
+
+		button {
+			width: 100%;
+			height: 35px;
+			margin-top: 15px;
+			color: config.$white;
+			background-color: config.$primary-color;
+			border: 0;
+			border-radius: 4px;
+			transition: 0.2s;
+		}
+
+		button:hover {
+			background-color: lighten($color: config.$primary-color, $amount: 6);
+		}
+	}
+}
+
+@include mixins.screen(819px) {
+	.container-profile {
+		.container-info {
+			div {
+				grid-template-columns: 1fr;
+
+				div {
+					span {
+						margin-left: 0;
+					}
+				}
+			}
+		}
+	}
+}
+
+.container-carts {
+	width: 95%;
+	box-sizing: border-box;
+	padding: 20px;
+	margin: 20px auto;
+	background-color: darken($color: config.$bg-color, $amount: 2.5);
+	border: 1px solid config.$input-border-color;
+	border-radius: 8px;
+	box-shadow: config.$drop-shadow-light;
+
+	span.badge {
+		font-size: 12px;
+		padding: 2px 8px;
+		color: config.$white;
+		background-color: config.$primary-color;
+		border-radius: 100px;
+	}
+
+	.title {
+		font-size: 20px;
+		font-weight: bold;
+	}
+
+	.cart {
+		width: 100%;
+		box-sizing: border-box;
+		padding: 20px;
+		margin: 20px auto;
+		background-color: darken($color: config.$bg-color, $amount: 2.5);
+		border: 1px solid config.$input-border-color;
+		border-radius: 8px;
+
+		.total-price {
+			margin-bottom: 25px;
+			display: flex;
+			align-items: center;
+
+			span {
+				font-weight: bold;
+			}
+
+			span:nth-child(1) {
+				margin-left: 8px;
+			}
+		}
+
+		.actions {
+			a {
+				padding: 8px 12px;
+				border-radius: 10px;
+				color: config.$white;
+				background-color: config.$primary-color;
+				transition: 0.2s;
+			}
+
+			a:hover {
+				text-decoration: none;
+				background-color: darken($color: config.$primary-color, $amount: 10);
+			}
+
+			.btn-danger {
+				background-color: config.$danger-color;
+			}
+
+			.btn-danger:hover {
+				background-color: darken($color: config.$danger-color, $amount: 10);
+			}
+		}
+
+		.line {
+			width: 100%;
+			height: 1px;
+			background-color: black;
+			margin: 10px 0;
+			margin-top: 20px;
+		}
+
+		.products {
+			width: 100%;
+			margin-top: 20px;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			overflow-x: auto;
+
+			.product-card {
+				width: 280px;
+				box-sizing: border-box;
+				padding: 5px;
+				font-size: 13px;
+				background-color: darken($color: config.$bg-color, $amount: 2.5);
+				border: 1px solid config.$input-border-color;
+				border-radius: 8px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+
+				img {
+					width: 270px;
+					max-height: 270px;
+					border-radius: 8px;
+					margin-bottom: 5px;
+				}
+
+				.pro-name {
+					margin-bottom: 10px;
+				}
+
+				.price {
+					margin-bottom: 10px;
+				}
+
+				.count {
+					margin-bottom: 15px;
+				}
+
+				.actions {
+					margin: 10px 0;
+					margin-bottom: 20px;
+
+					a {
+						padding: 8px 16px;
+					}
+				}
+
+				.btn-danger {
+					width: 90%;
+					padding: 8px 12px;
+					border-radius: 10px;
+					color: config.$white;
+					background-color: config.$danger-color;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					transition: 0.2s;
+				}
+
+				.btn-danger:hover {
+					text-decoration: none;
+					background-color: darken($color: config.$danger-color, $amount: 10);
+				}
+			}
+		}
+	}
+}
