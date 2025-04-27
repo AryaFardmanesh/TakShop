@@ -8,6 +8,20 @@ body {
 	margin: 0 auto;
 }
 
+.back-link {
+	margin-right: 35px;
+	padding: 8px 28px;
+	border-radius: 10px;
+	color: config.$white;
+	background-color: config.$primary-color;
+	transition: 0.2s;
+}
+
+.back-link:hover {
+	text-decoration: none;
+	background-color: darken($color: config.$primary-color, $amount: 10);
+}
+
 .container-profile {
 	width: 95%;
 	box-sizing: border-box;
@@ -266,6 +280,31 @@ body {
 				.btn-danger:hover {
 					text-decoration: none;
 					background-color: darken($color: config.$danger-color, $amount: 10);
+				}
+
+				.btn {
+					width: 90%;
+					padding: 8px 12px;
+					border-radius: 10px;
+					color: config.$white;
+					background-color: config.$primary-color;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					transition: 0.2s;
+				}
+
+				.btn:hover {
+					text-decoration: none;
+					background-color: darken($color: config.$primary-color, $amount: 10);
+				}
+
+				.btns-row {
+					width: 100%;
+					display: flex;
+					align-items: center;
+					justify-content: stretch;
+					column-gap: 5px;
 				}
 			}
 		}
