@@ -8,6 +8,9 @@
 	<title>TakShop - Profile</title>
 </head>
 <body>
+	<br />
+	<a href="./../index/" class="back-link">برگشت</a>
+
 	<div class="container-profile">
 		<div class="container-profile-avatar-name">
 			<img src="./../assets/images/avatar/profile.png" alt="Profile Avatar." />
@@ -51,6 +54,103 @@
 	</div>
 
 	<div class="container-carts">
+		<span class="title">محصولات خود</span>
+
+		<div class="cart">
+			<div class="total-price">
+				<span>قیمت کل:</span>
+				<span class="badge">
+					1,000
+					تومان
+				</span>
+			</div>
+
+			<div class="total-price">
+				<span>فروش:</span>
+				<span class="badge">
+					0
+					تومان
+				</span>
+			</div>
+
+			<div class="total-price">
+				<span>تعداد محصولات:</span>
+				<span class="badge">0</span>
+			</div>
+
+			<div class="actions">
+				<a href="#">+ ایجاد محصول</a>
+			</div>
+
+			<div class="line"></div>
+
+			<div class="products">
+				<div class="product-card">
+					<img src="./../assets/images/logo/logo.png" alt="Product Image." />
+					<span class="pro-name">نام محصول</span>
+					<div class="price">
+						<span>1,000</span>
+						<span class="badge">تومان</span>
+					</div>
+					<div class="count">
+						<span>تعداد:</span>
+						<span class="badge">1</span>
+					</div>
+					<div class="actions">
+						<a href="#">+</a>
+						<a href="#">-</a>
+					</div>
+					<div class="btns-row">
+						<a href="#" class="btn">مشاهده</a>
+						<a href="#" class="btn-danger">حذف</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-carts">
+		<span class="title">محصولات حذف شده</span>
+
+		<div class="cart">
+			<div class="total-price">
+				<span>قیمت کل:</span>
+				<span class="badge">
+					1,000
+					تومان
+				</span>
+			</div>
+
+			<div class="total-price">
+				<span>تعداد محصولات:</span>
+				<span class="badge">1</span>
+			</div>
+
+			<div class="line"></div>
+
+			<div class="products">
+				<div class="product-card">
+					<img src="./../assets/images/logo/logo.png" alt="Product Image." />
+					<span class="pro-name">نام محصول</span>
+					<div class="price">
+						<span>1,000</span>
+						<span class="badge">تومان</span>
+					</div>
+					<div class="count">
+						<span>تعداد:</span>
+						<span class="badge">1</span>
+					</div>
+
+					<div class="btns-row">
+						<a href="#" class="btn">بازگردانی</a>
+						<a href="#" class="btn-danger">حذف</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-carts">
 		<span class="title">سبد خرید</span>
 
 		<div class="cart">
@@ -63,7 +163,7 @@
 			</div>
 
 			<div class="actions">
-				<a href="#">خرید</a>
+				<a href="#">پرداخت</a>
 				<a href="#" class="btn-danger">حذف سبد</a>
 			</div>
 
@@ -74,7 +174,7 @@
 					<img src="./../assets/images/logo/logo.png" alt="Product Image." />
 					<span class="pro-name">نام محصول</span>
 					<div class="price">
-						<span>1000</span>
+						<span>1,000</span>
 						<span class="badge">تومان</span>
 					</div>
 					<div class="count">
@@ -85,7 +185,47 @@
 						<a href="#">+</a>
 						<a href="#">-</a>
 					</div>
-					<a href="#" class="btn-danger">حذف از سبد</a>
+					<div class="btns-row">
+						<a href="#" class="btn">مشاهده</a>
+						<a href="#" class="btn-danger">حذف از سبد</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-carts">
+		<span class="title">تاریخچه خرید</span>
+
+		<div class="cart">
+			<div class="total-price">
+				<span>قیمت کل:</span>
+				<span class="badge">
+					1,000
+					تومان
+				</span>
+			</div>
+
+			<div class="total-price">
+				<span>تاریخ:</span>
+				<span class="badge">2025/04/27</span>
+			</div>
+
+			<div class="line"></div>
+
+			<div class="products">
+				<div class="product-card">
+					<img src="./../assets/images/logo/logo.png" alt="Product Image." />
+					<span class="pro-name">نام محصول</span>
+					<div class="price">
+						<span>1,000</span>
+						<span class="badge">تومان</span>
+					</div>
+					<div class="count">
+						<span>تعداد:</span>
+						<span class="badge">1</span>
+					</div>
+					<a href="#" class="btn">مشاهده</a>
 				</div>
 			</div>
 		</div>
