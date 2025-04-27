@@ -160,6 +160,7 @@ This section delves into the structure of the database, detailing the tables and
 | ID             | VARCHAR  | Payment ID (Primary Key)             |
 | CartID         | VARCHAR  | CartsCategory reference (Foreign Key)|
 | Status         | INT      | `Ready`, `Cancel`, `Payed`           |
+| Date           | Date     | Date of pay                          |
 
 ### PaymentsSessions Table
 
