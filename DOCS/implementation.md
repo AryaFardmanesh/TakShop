@@ -122,6 +122,7 @@ This section delves into the structure of the database, detailing the tables and
 | Description    | VARCHAR  | Detailed product information         |
 | Price          | DECIMAL  | Price of the product                 |
 | Count          | INT      | Inventory quantity                   |
+| Image          | VARCHAR  | Product image                        |
 | Status         | INT      | `Ok` or `Ban`                        |
 | BanMessage     | VARCHAR  | Product removal reason               |
 
