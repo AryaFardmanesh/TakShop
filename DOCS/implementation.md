@@ -151,8 +151,7 @@ This section delves into the structure of the database, detailing the tables and
 |----------------|----------|--------------------------------------|
 | ID             | VARCHAR  | Order identifier (Primary Key)       |
 | CartID         | VARCHAR  | CartsCategory reference (Foreign Key)|
-| Status         | INT      | Order state: `Suspended`, `Ready`, `Cancel`, `Payed`, `Ban` |
-| BanMessage     | VARCHAR  | Order cancellation reason            |
+| Status         | INT      | Order state: `Ready`, `Cancel`, `Payed` |
 
 ### Payments Table
 
