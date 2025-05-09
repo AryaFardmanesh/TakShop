@@ -8,6 +8,18 @@
 	<title>TakShop - Profile</title>
 </head>
 <body>
+	<nav class="nav">
+		<a href="../index/" title="Home">
+			<i class="fa-solid fa-home fa-lg"></i>
+		</a>
+		<a href="./" class="active" title="Profile">
+			<i class="fa-solid fa-user fa-lg"></i>
+		</a>
+		<a href="../dashboard/" title="Admin Panel">
+			<i class="fa-solid fa-dashboard fa-lg"></i>
+		</a>
+	</nav>
+
 	<br />
 	<a href="./../index/" class="back-link">برگشت</a>
 
