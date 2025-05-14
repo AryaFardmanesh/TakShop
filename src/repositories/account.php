@@ -1,6 +1,6 @@
 <?php
 
-include_once "./../models/account.php";
+include_once __DIR__ . "/../models/account.php";
 
 class AccountRepository {
 	public static function findById( string $id ): ?AccountModel {}
