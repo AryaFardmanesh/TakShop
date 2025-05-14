@@ -83,7 +83,7 @@ project/
 ├── src/                  	   # PHP source files (non-public)
 │   ├── utils/            	   # Utility functions and application helpers
 │   ├── models/           	   # Backend models representing data structures
-│   ├── controllers/      	   # Page controllers managing business logic
+│   ├── services/      	      # Services managing business logic
 │   └── config.php        	   # Main PHP configuration file
 ├── scripts/              	   # TypeScript source files
 │   ├── modules/      	      # All modules and functions
