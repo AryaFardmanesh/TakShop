@@ -1,6 +1,6 @@
 <?php
 
-include_once "./config.php";
+include_once __DIR__ . "/config.php";
 
 class Database {
 	public ?string $error_message = null;
