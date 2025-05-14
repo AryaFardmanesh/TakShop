@@ -2,6 +2,7 @@
 
 include_once __DIR__ . "/../models/account.php";
 include_once __DIR__ . "/../utils/database.php";
+include_once __DIR__ . "/../utils/jwt.php";
 
 class AccountRepository {
 	public static function findById( string $id ): ?AccountModel {
@@ -258,6 +259,18 @@ class AccountRepository {
 		$model->role = ACCOUNT_ROLE_ADMIN;
 
 		return AccountRepository::update( $model );
+	}
+
+	public static function isValidToken( string $token ): bool {
+		$result = JWT::decode( $token );
+
+		if ( $result == null ) {
+			return false;
+		}
+
+		$model = AccountRepository::findByUsername( $result[ "body" ][ "username" ] );
+
+		return $model != null;
 	}
 }
 
