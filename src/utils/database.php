@@ -21,6 +21,10 @@ class Database {
 	}
 
 	public function disconnect(): void {
+		if ( !$this->isConnect() ) {
+			return;
+		}
+
 		mysqli_close( $this->connection );
 		$this->connection = null;
 	}
