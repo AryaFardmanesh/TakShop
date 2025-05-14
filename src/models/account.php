@@ -1,5 +1,7 @@
 <?php
 
+include_once __DIR__ . "/../utils/id.php";
+
 enum AccountRole: int {
 	case NORMAL	=	10;
 	case ADMIN	=	20;
@@ -23,7 +25,9 @@ class AccountModel {
 		public readonly AccountRole $role = AccountRole::NORMAL,
 		public readonly AccountStatus $status = AccountStatus::OK,
 		public readonly string $banMessage = "",
-	) {}
+	) {
+		$this->id = generateID();
+	}
 }
 
 ?>
