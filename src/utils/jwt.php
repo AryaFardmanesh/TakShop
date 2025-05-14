@@ -1,6 +1,6 @@
 <?php
 
-include_once "./../config.php";
+include_once __DIR__ . "/../config.php";
 
 class JWT {
 	public static function encode( array $payload ): string {
