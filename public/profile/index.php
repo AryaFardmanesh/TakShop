@@ -1,3 +1,17 @@
+<?php
+
+include_once __DIR__ . "/../../src/services/login.php";
+
+session_start();
+
+$isLogin = false;
+
+if ( isset( $_SESSION[ "token" ] ) && AccountRepository::isValidToken( $_SESSION[ "token" ] ) ) {
+	$isLogin = true;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,12 +26,22 @@
 		<a href="../index/" title="Home">
 			<i class="fa-solid fa-home fa-lg"></i>
 		</a>
+
 		<a href="./" class="active" title="Profile">
 			<i class="fa-solid fa-user fa-lg"></i>
 		</a>
+
 		<a href="../dashboard/" title="Admin Panel">
 			<i class="fa-solid fa-dashboard fa-lg"></i>
 		</a>
+
+		<?php
+			if ( $isLogin ) {
+		?>
+		<a href="../logout/" title="Logout">
+			<i class="fa-solid fa-sign-out fa-lg"></i>
+		</a>
+		<?php } ?>
 	</nav>
 
 	<br />

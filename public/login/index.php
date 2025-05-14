@@ -4,7 +4,7 @@ include_once __DIR__ . "/../../src/services/login.php";
 
 session_start();
 
-if ( $_SESSION[ "token" ] && AccountRepository::isValidToken( $_SESSION[ "token" ] ) ) {
+if ( isset( $_SESSION[ "token" ] ) && AccountRepository::isValidToken( $_SESSION[ "token" ] ) ) {
 	header( "location:./../index/" );
 }
 
@@ -15,6 +15,8 @@ if ( LoginService::didSent() ) {
 
 	if ( $result[ "result" ] == false ) {
 		$error_message = $result[ "message" ];
+	}else {
+		header( "location:./../index/" );
 	}
 }
 
