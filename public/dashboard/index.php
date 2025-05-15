@@ -4,10 +4,16 @@ include_once __DIR__ . "/../../src/services/login.php";
 
 session_start();
 
-$isLogin = false;
+if ( !isset( $_SESSION[ "token" ] ) ) {
+	header( "location:./../index/" );
+	die;
+}
 
-if ( isset( $_SESSION[ "token" ] ) && AccountRepository::isValidToken( $_SESSION[ "token" ] ) ) {
-	$isLogin = true;
+$user = AccountRepository::findByToken( $_SESSION[ "token" ] );
+
+if ( $user == null || $user->role != ACCOUNT_ROLE_ADMIN ) {
+	header( "location:./../index/" );
+	die;
 }
 
 ?>
@@ -35,13 +41,9 @@ if ( isset( $_SESSION[ "token" ] ) && AccountRepository::isValidToken( $_SESSION
 			<i class="fa-solid fa-dashboard fa-lg"></i>
 		</a>
 
-		<?php
-			if ( $isLogin ) {
-		?>
 		<a href="../logout/" title="Logout">
 			<i class="fa-solid fa-sign-out fa-lg"></i>
 		</a>
-		<?php } ?>
 	</nav>
 
 	<div class="sidebar">
