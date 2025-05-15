@@ -90,6 +90,7 @@ $allUsers = AccountRepository::getAllUser() ?? [];
 					$status = convertStatusToString ( $allUsers[ $i ][ "status" ] );
 					$banMsg = $allUsers[ $i ][ "ban_message" ];
 					$date = $allUsers[ $i ][ "date" ];
+					$isBan = $allUsers[ $i ][ "status" ] == ACCOUNT_STATUS_BAN;
 			?>
 			<tr>
 				<td><?php echo ( $i + 1 ); ?></td>
@@ -112,10 +113,14 @@ $allUsers = AccountRepository::getAllUser() ?? [];
 					<span class="badge"><?php echo $date; ?></span>
 				</td>
 				<td>
-					<a href="./../../src/controllers/banusers.php?tid=<?php echo $allUsers[ $i ][ "id" ] ?>" disabled>مسدود کردن</a>
+					<?php if ( $isBan ) { ?>
+					<a href="./../../src/controllers/unbanusers.php?tid=<?php echo $allUsers[ $i ][ "id" ]; ?>" disabled>مسدود کردن</a>
+					<?php }else { ?>
+					<a href="./../../src/controllers/banusers.php?tid=<?php echo $allUsers[ $i ][ "id" ]; ?>" disabled>آزاد سازی</a>
+					<?php } ?>
 				</td>
 				<td>
-					<a href="./../../src/controllers/removeusers.php?tid=<?php echo $allUsers[ $i ][ "id" ] ?>" disabled>حذف کردن</a>
+					<a href="./../../src/controllers/removeusers.php?tid=<?php echo $allUsers[ $i ][ "id" ]; ?>" disabled>حذف کردن</a>
 				</td>
 			</tr>
 			<?php } ?>
