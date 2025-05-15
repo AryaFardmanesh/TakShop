@@ -5,9 +5,14 @@ include_once __DIR__ . "/../../src/services/login.php";
 session_start();
 
 $isLogin = false;
+$isAdmin = false;
 
 if ( isset( $_SESSION[ "token" ] ) && AccountRepository::isValidToken( $_SESSION[ "token" ] ) ) {
 	$isLogin = true;
+
+	if ( AccountRepository::findByToken( $_SESSION[ "token" ] )->role == ACCOUNT_ROLE_ADMIN ) {
+		$isAdmin = true;
+	}
 }
 
 ?>
@@ -32,7 +37,7 @@ if ( isset( $_SESSION[ "token" ] ) && AccountRepository::isValidToken( $_SESSION
 		</a>
 
 		<?php
-			if ( $isLogin ) {
+			if ( $isLogin && $isAdmin ) {
 		?>
 		<a href="../dashboard/" title="Admin Panel">
 			<i class="fa-solid fa-dashboard fa-lg"></i>
