@@ -71,7 +71,7 @@ $allUsers = AccountRepository::getAllUser() ?? [];
 				<th>آدرس</th>
 				<th>نقش</th>
 				<th>وضعیت</th>
-				<th>توضیحات</th>
+				<!-- <th>توضیحات</th> -->
 				<th>تاریخ ایجاد حساب</th>
 				<th>تغییر وضعیت</th>
 				<th>حذف حساب</th>
@@ -105,17 +105,17 @@ $allUsers = AccountRepository::getAllUser() ?? [];
 				<td>
 					<span class="badge"><?php echo $status; ?></span>
 				</td>
-				<td>
-					<textarea placeholder="توضیحات..."><?php echo $banMsg; ?></textarea>
-				</td>
+				<!-- <td>
+					<textarea placeholder="توضیحات..."><?php /* echo $banMsg; */ ?></textarea>
+				</td> -->
 				<td>
 					<span class="badge"><?php echo $date; ?></span>
 				</td>
 				<td>
-					<a href="#">مسدود کردن</a>
+					<a href="./../../src/controllers/banusers.php?tid=<?php echo $allUsers[ $i ][ "id" ] ?>" disabled>مسدود کردن</a>
 				</td>
 				<td>
-					<a href="#">حذف کردن</a>
+					<a href="./../../src/controllers/removeusers.php?tid=<?php echo $allUsers[ $i ][ "id" ] ?>" disabled>حذف کردن</a>
 				</td>
 			</tr>
 			<?php } ?>
