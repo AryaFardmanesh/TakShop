@@ -17,7 +17,7 @@ if ( $model == null ) {
 }
 
 $model->status = ACCOUNT_STATUS_OK;
-print_r( AccountRepository::update( $model ) );
+AccountRepository::update( $model );
 
 header( "location:./../../public/dashboard/" );
 die;

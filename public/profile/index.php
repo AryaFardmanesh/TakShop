@@ -1,14 +1,26 @@
 <?php
 
 include_once __DIR__ . "/../../src/services/login.php";
+include_once __DIR__ . "/../../src/utils/convertor.php";
 
 session_start();
 
-$isLogin = false;
-
-if ( isset( $_SESSION[ "token" ] ) && AccountRepository::isValidToken( $_SESSION[ "token" ] ) ) {
-	$isLogin = true;
+if ( !isset( $_SESSION[ "token" ] ) || !AccountRepository::isValidToken( $_SESSION[ "token" ] ) ) {
+	header( "location:./../login/" );
+	die;
 }
+
+$model = AccountRepository::findByToken( $_SESSION[ "token" ] );
+
+$id = $model->id;
+$username = $model->username;
+$name = $model->name;
+$phone = $model->phone;
+$zipcode = $model->zipcode;
+$address = $model->address;
+$role = convertRolesToString( $model->role );
+$date = $model->date;
+$isAdmin = $model->role == ACCOUNT_ROLE_ADMIN;
 
 ?>
 
@@ -31,17 +43,15 @@ if ( isset( $_SESSION[ "token" ] ) && AccountRepository::isValidToken( $_SESSION
 			<i class="fa-solid fa-user fa-lg"></i>
 		</a>
 
+		<?php if ( $isAdmin ) { ?>
 		<a href="../dashboard/" title="Admin Panel">
 			<i class="fa-solid fa-dashboard fa-lg"></i>
 		</a>
+		<?php } ?>
 
-		<?php
-			if ( $isLogin ) {
-		?>
 		<a href="../logout/" title="Logout">
 			<i class="fa-solid fa-sign-out fa-lg"></i>
 		</a>
-		<?php } ?>
 	</nav>
 
 	<br />
@@ -53,35 +63,35 @@ if ( isset( $_SESSION[ "token" ] ) && AccountRepository::isValidToken( $_SESSION
 			<span>نام کاربری</span>
 		</div>
 
-		<form class="container-info">
+		<form action="./../../src/controllers/userupdate.php?tid=<?php echo $id; ?>" method="POST" class="container-info">
 			<div>
 				<div>
 					<label for="account-username">نام کاربری:</label>
-					<input type="text" id="account-username" name="account-username" value="Arya" spellcheck="false" required />
+					<input type="text" id="account-username" name="username" value="<?php echo $username; ?>" spellcheck="false" required />
 				</div>
 				<div>
 					<label for="account-name">نام:</label>
-					<input type="text" id="account-name" name="account-name" value="آریا فردمنش" spellcheck="false" required />
+					<input type="text" id="account-name" name="name" value="<?php echo $name; ?>" spellcheck="false" required />
 				</div>
 				<div>
 					<label for="account-phone">تلفن همراه:</label>
-					<input type="text" id="account-phone" name="account-phone" value="09024708900" spellcheck="false" required />
+					<input type="text" id="account-phone" name="phone" value="<?php echo $phone; ?>" spellcheck="false" required />
 				</div>
 				<div>
 					<label for="account-zipcode">کد پستی:</label>
-					<input type="text" id="account-zipcode" name="account-zipcode" value="1471470890" spellcheck="false" required />
+					<input type="text" id="account-zipcode" name="zipcode" value="<?php echo $zipcode; ?>" spellcheck="false" required />
 				</div>
 				<div>
 					<label for="address">آدرس:</label>
-					<textarea id="address" name="address" spellcheck="false" required>تهران</textarea>
+					<textarea id="address" name="address" spellcheck="false" required><?php echo $address; ?></textarea>
 				</div>
 				<div>
 					<label>نوع حساب کاربری:</label>
-					<span>معمولی</span>
+					<span><?php echo $role; ?></span>
 				</div>
 				<div>
 					<label>تاریخ ایجاد حساب کاربری:</label>
-					<span>2025/01/18</span>
+					<span><?php echo $date; ?></span>
 				</div>
 			</div>
 
