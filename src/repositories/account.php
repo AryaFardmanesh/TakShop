@@ -83,6 +83,14 @@ class AccountRepository {
 		return $model;
 	}
 
+	public static function findByToken( string $token ): ?AccountModel {
+		$result = JWT::decode( $token );
+
+		return ( $result == null ) ? null : AccountRepository::findByUsername(
+			$result[ "body" ][ "username" ]
+		);
+	}
+
 	public static function create( AccountModel $account ): array {
 		$db = new Database();
 
