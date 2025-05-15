@@ -125,7 +125,7 @@ $isAdmin = $model->role == ACCOUNT_ROLE_ADMIN;
 			</div>
 
 			<div class="actions">
-				<a href="#">+ ایجاد محصول</a>
+				<a href="./../addprod/">+ ایجاد محصول</a>
 			</div>
 
 			<div class="line"></div>
