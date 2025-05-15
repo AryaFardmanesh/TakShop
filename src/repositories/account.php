@@ -280,6 +280,30 @@ class AccountRepository {
 
 		return $model != null;
 	}
+
+	public static function getAllUser(): ?array {
+		$db = new Database();
+
+		if ( !$db->connect() ) {
+			return null;
+		}
+
+		$result = $db->execute( "SELECT * FROM `accounts`;" );
+
+		if ( mysqli_num_rows( $result ) == 0 ) {
+			return null;
+		}
+
+		$users = [];
+
+		while ( $row = mysqli_fetch_assoc( $result ) ) {
+			array_push( $users, $row );
+		}
+
+		$db->disconnect();
+
+		return $users;
+	}
 }
 
 ?>
