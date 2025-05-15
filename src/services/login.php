@@ -40,6 +40,13 @@ class LoginService {
 			];
 		}
 
+		if ( !password_verify( $data[ "password" ], $model->password ) ) {
+			return [
+				"message" => "رمز عبور اشتباه است.",
+				"result" => false
+			];
+		}
+
 		$_SESSION[ 'token' ] = JWT::encode( [
 			"id" => $model->id,
 			"username" => $model->username,
