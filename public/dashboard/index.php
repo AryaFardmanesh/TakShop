@@ -1,6 +1,7 @@
 <?php
 
 include_once __DIR__ . "/../../src/services/login.php";
+include_once __DIR__ . "/../../src/utils/convertor.php";
 
 session_start();
 
@@ -15,6 +16,8 @@ if ( $user == null || $user->role != ACCOUNT_ROLE_ADMIN ) {
 	header( "location:./../index/" );
 	die;
 }
+
+$allUsers = AccountRepository::getAllUser() ?? [];
 
 ?>
 
@@ -47,14 +50,14 @@ if ( $user == null || $user->role != ACCOUNT_ROLE_ADMIN ) {
 	</nav>
 
 	<div class="sidebar">
-		<button tid="users" class="active">کاربران</button>
+		<button tid="allUsers" class="active">کاربران</button>
 		<button tid="orders">سفارشات</button>
 		<button tid="financial">مالی</button>
 		<button tid="docs">مستندات</button>
 	</div>
 
-	<!-- Users Section -->
-	<section id="users" class="tab active">
+	<!-- allUsers Section -->
+	<section id="allUsers" class="tab active">
 		<h1>لیست تمامی کاربران سایت</h1>
 
 		<table class="user-table">
@@ -74,25 +77,39 @@ if ( $user == null || $user->role != ACCOUNT_ROLE_ADMIN ) {
 				<th>حذف حساب</th>
 			</tr>
 
+			<?php
+				$allUsersLen = count( $allUsers );
+				for ( $i = 0; $i < $allUsersLen; $i++ ) {
+					$id = substr( $allUsers[ $i ][ "id" ], 0, 8 ) . "...";
+					$username = $allUsers[ $i ][ "username" ];
+					$name = $allUsers[ $i ][ "name" ];
+					$phone = $allUsers[ $i ][ "phone" ];
+					$zipcode = $allUsers[ $i ][ "zipcode" ];
+					$address = substr( $allUsers[ $i ][ "address" ], 0, 18 ) . "...";
+					$role = convertRolesToString ( $allUsers[ $i ][ "role" ] );
+					$status = convertStatusToString ( $allUsers[ $i ][ "status" ] );
+					$banMsg = $allUsers[ $i ][ "ban_message" ];
+					$date = $allUsers[ $i ][ "date" ];
+			?>
 			<tr>
-				<td>1</td>
-				<td>012345</td>
-				<td>Arya</td>
-				<td>آریا فردمنش</td>
-				<td>09024708900</td>
-				<td>147708914</td>
-				<td>تهران, میدان دانشگاه, خیابان ستاری...</td>
+				<td><?php echo ( $i + 1 ); ?></td>
+				<td><?php echo $id; ?></td>
+				<td><?php echo $username; ?></td>
+				<td><?php echo $name; ?></td>
+				<td><?php echo $phone; ?></td>
+				<td><?php echo $zipcode; ?></td>
+				<td><?php echo $address; ?></td>
 				<td>
-					<span class="badge">مدیر</span>
+					<span class="badge"><?php echo $role; ?></span>
 				</td>
 				<td>
-					<span class="badge">عادی</span>
+					<span class="badge"><?php echo $status; ?></span>
 				</td>
 				<td>
-					<textarea placeholder="توضیحات..."></textarea>
+					<textarea placeholder="توضیحات..."><?php echo $banMsg; ?></textarea>
 				</td>
 				<td>
-					<span class="badge">1404/02/21</span>
+					<span class="badge"><?php echo $date; ?></span>
 				</td>
 				<td>
 					<a href="#">مسدود کردن</a>
@@ -101,6 +118,7 @@ if ( $user == null || $user->role != ACCOUNT_ROLE_ADMIN ) {
 					<a href="#">حذف کردن</a>
 				</td>
 			</tr>
+			<?php } ?>
 		</table>
 	</section>
 
