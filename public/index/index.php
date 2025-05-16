@@ -32,9 +32,13 @@ if ( isset( $_SESSION[ "token" ] ) && AccountRepository::isValidToken( $_SESSION
 			<i class="fa-solid fa-home fa-lg"></i>
 		</a>
 
+		<?php
+			if ( $isLogin ) {
+		?>
 		<a href="../profile/" title="Profile">
 			<i class="fa-solid fa-user fa-lg"></i>
 		</a>
+		<?php } ?>
 
 		<?php
 			if ( $isLogin && $isAdmin ) {
