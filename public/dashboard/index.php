@@ -94,12 +94,12 @@ $allUsers = AccountRepository::getAllUser() ?? [];
 			?>
 			<tr>
 				<td><?php echo ( $i + 1 ); ?></td>
-				<td><?php echo $id; ?></td>
+				<td title="<?php echo $allUsers[ $i ][ "id" ] ?>"><?php echo $id; ?></td>
 				<td><?php echo $username; ?></td>
 				<td><?php echo $name; ?></td>
 				<td><?php echo $phone; ?></td>
 				<td><?php echo $zipcode; ?></td>
-				<td><?php echo $address; ?></td>
+				<td title="<?php echo $allUsers[ $i ][ "address" ] ?>"><?php echo $address; ?></td>
 				<td>
 					<span class="badge"><?php echo $role; ?></span>
 				</td>
