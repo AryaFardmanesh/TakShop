@@ -68,7 +68,7 @@ class AddProductService {
 			description: $data[ "description" ],
 			price: $data[ "price" ],
 			count: $data[ "count" ],
-			image: $imageAddress,
+			image: $imageName,
 		);
 
 		return ProductRepository::create( $model );
