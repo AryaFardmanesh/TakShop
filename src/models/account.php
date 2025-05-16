@@ -9,8 +9,6 @@ define( 'ACCOUNT_STATUS_OK', 10 );
 define( 'ACCOUNT_STATUS_BAN', 20 );
 
 class AccountModel {
-	private ?string $error_message = null;
-
 	function __construct(
 		public string $username,
 		public string $password,
