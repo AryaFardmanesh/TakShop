@@ -47,6 +47,13 @@ class LoginService {
 			];
 		}
 
+		if ( $model->status == ACCOUNT_STATUS_BAN ) {
+			return [
+				"message" => "حساب شما مسدود شده است.",
+				"result" => false
+			];
+		}
+
 		$_SESSION[ 'token' ] = JWT::encode( [
 			"id" => $model->id,
 			"username" => $model->username,
