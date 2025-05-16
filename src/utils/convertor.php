@@ -24,4 +24,28 @@ function convertStatusToString( int $status ): string {
 	}
 }
 
+function convertPriceToReadableFormat( int | string $price ): string {
+	$price = "$price";
+	$newPrice = "";
+	$counter = 1;
+
+	for ( $i = strlen( $price ) - 1; $i >= 0; $i-- ) {
+		$newPrice = $newPrice . $price[ $i ];
+
+		if ( $counter == 3 ) {
+			$counter = 0;
+			$newPrice = $newPrice . ",";
+		}
+
+		$counter++;
+	}
+
+	$newPrice = strrev( $newPrice );
+	if ( $newPrice[ 0 ] == "," ) {
+		$newPrice = substr( $newPrice, 1 );
+	}
+
+	return $newPrice;
+}
+
 ?>
