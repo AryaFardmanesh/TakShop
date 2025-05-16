@@ -114,9 +114,9 @@ $allUsers = AccountRepository::getAllUser() ?? [];
 				</td>
 				<td>
 					<?php if ( $isBan ) { ?>
-					<a href="./../../src/controllers/unbanusers.php?tid=<?php echo $allUsers[ $i ][ "id" ]; ?>" disabled>مسدود کردن</a>
+					<a href="./../../src/controllers/unbanusers.php?tid=<?php echo $allUsers[ $i ][ "id" ]; ?>" disabled>آزاد سازی</a>
 					<?php }else { ?>
-					<a href="./../../src/controllers/banusers.php?tid=<?php echo $allUsers[ $i ][ "id" ]; ?>" disabled>آزاد سازی</a>
+					<a href="./../../src/controllers/banusers.php?tid=<?php echo $allUsers[ $i ][ "id" ]; ?>" disabled>مسدود کردن</a>
 					<?php } ?>
 				</td>
 				<td>
