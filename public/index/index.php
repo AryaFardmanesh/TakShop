@@ -1,6 +1,8 @@
 <?php
 
 include_once __DIR__ . "/../../src/services/login.php";
+include_once __DIR__ . "/../../src/repositories/product.php";
+include_once __DIR__ . "/../../src/utils/convertor.php";
 
 session_start();
 
@@ -75,15 +77,22 @@ if ( isset( $_SESSION[ "token" ] ) && AccountRepository::isValidToken( $_SESSION
 	<hr />
 
 	<div class="container-products">
+		<?php
+			$products = ProductRepository::getAllProducts();
+
+			if ( $products != null ) {
+				foreach ( $products as $product ) {
+		?>
 		<div class="container-product">
-			<img src="./../assets/images/logo/logo.png" alt="Product image." />
-			<span class="pro-name">نام محصول</span>
+			<img src="./../assets/images/products/<?php echo $product[ "image" ]; ?>" alt="Product image." />
+			<span class="pro-name"><?php echo $product[ "name" ]; ?></span>
 			<span class="price">
-				<span>1000</span>
+				<span><?php echo convertPriceToReadableFormat( $product[ "price" ] ); ?></span>
 				<span class="badge">تومان</span>
 			</span>
-			<a href="#">مشاهده</a>
+			<a href="./../product/?pid=<?php echo $product[ "id" ]; ?>">مشاهده</a>
 		</div>
+		<?php } } ?>
 	</div>
 
 	<script src="./main.js"></script>
