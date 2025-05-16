@@ -174,7 +174,7 @@ This section delves into the structure of the database, detailing the tables and
 ### Account Creation
 
 1. Insert a new record into the `Accounts` table.
-2. Generate a unique UUID for the `ID` field.
+2. Generate a unique ID for the `ID` field.
 3. Store the password using a secure hashing algorithm.
 4. Set the default role to `Normal` and status to `Ok`.
 
