@@ -5,7 +5,7 @@ include_once __DIR__ . "/../utils/id.php";
 define( 'PRODUCT_STATUS_OK', 10 );
 define( 'PRODUCT_STATUS_BAN', 20 );
 
-class AccountModel {
+class ProductModel {
 	function __construct(
 		public string $owner,
 		public string $name,
