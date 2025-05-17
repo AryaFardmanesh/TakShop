@@ -1,6 +1,5 @@
 <?php
 
-include_once __DIR__ . "/../../src/services/login.php";
 include_once __DIR__ . "/../../src/repositories/product.php";
 include_once __DIR__ . "/../../src/utils/convertor.php";
 
