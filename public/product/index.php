@@ -1,3 +1,23 @@
+<?php
+
+include_once __DIR__ . "/../../src/repositories/product.php";
+include_once __DIR__ . "/../../src/utils/convertor.php";
+
+if ( !isset( $_REQUEST[ "pid" ] ) ) {
+	header( "location:./../index/" );
+	die;
+}
+
+$pid = $_REQUEST[ "pid" ];
+$product = ProductRepository::findById( $pid );
+
+if ( $product == null ) {
+	header( "location:./../index/" );
+	die;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,22 +32,22 @@
 	<a href="./../index/" class="back-link">برگشت</a>
 
 	<div class="container-carts">
-		<span class="title">اسم محصول</span>
+		<span class="title"><?php echo $product->name; ?></span>
 		<br />
-		<span class="description">شرح محصول</span>
+		<span class="description"><?php echo $product->description; ?></span>
 
 		<div class="cart">
 			<div class="total-price">
 				<span>قیمت:</span>
 				<span class="badge">
-					1,000
+					<?php echo convertPriceToReadableFormat( $product->price ); ?>
 					تومان
 				</span>
 			</div>
 
 			<div class="total-price">
 				<span>تعداد موجود در انبار:</span>
-				<span class="badge">0</span>
+				<span class="badge"><?php echo $product->count; ?></span>
 			</div>
 
 			<!-- <div class="total-price">
@@ -36,7 +56,7 @@
 			</div> -->
 
 			<div class="product-img">
-				<img src="./../assets/images/logo/logo.png" alt="Product Image." />
+				<img src="./../assets/images/products/<?php echo $product->image; ?>" alt="Product Image." />
 			</div>
 
 			<div class="actions">
