@@ -157,12 +157,12 @@ $isAdmin = $model->role == ACCOUNT_ROLE_ADMIN;
 						<span class="badge"><?php echo $count; ?></span>
 					</div>
 					<div class="actions">
-						<a href="#">+</a>
-						<a href="#">-</a>
+						<a href="./../../src/controllers/product.php?pid=<?php echo $id; ?>&action=PRODUCT_ACTION_INC">+</a>
+						<a href="./../../src/controllers/product.php?pid=<?php echo $id; ?>&action=PRODUCT_ACTION_DEC">-</a>
 					</div>
 					<div class="btns-row">
 						<a href="./../product/?pid=<?php echo $id; ?>" class="btn">مشاهده</a>
-						<a href="#" class="btn-danger">حذف</a>
+						<a href="./../../src/controllers/product.php?pid=<?php echo $id; ?>&action=PRODUCT_ACTION_DEL" class="btn-danger">حذف</a>
 					</div>
 				</div>
 				<?php } } ?>
