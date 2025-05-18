@@ -84,6 +84,7 @@ project/
 │   ├── utils/            	   # Utility functions and application helpers
 │   ├── models/           	   # Backend models representing data structures
 │   ├── services/      	      # Services managing business logic
+│   ├── controllers    	      # All controllers for handler some requests
 │   └── config.php        	   # Main PHP configuration file
 ├── scripts/              	   # TypeScript source files
 │   ├── modules/      	      # All modules and functions
@@ -92,6 +93,7 @@ project/
 ├── styles/               	   # SASS source files
 │   ├── components/       	   # Styles for reusable components
 │   ├── pages/            	   # Page-specific style files
+│   │   └ {pages_name}.scss   # Directory for page-specific styles (e.g., login)
 │   ├── _config.scss      	   # Global style variables and settings
 │   └── _mixins.scss      	   # SASS mixins and functions
 ├── config.js             	   # Global configuration file for Gulp tasks
@@ -104,8 +106,3 @@ project/
 ├── SECURITY.md             	# The SECURITY file
 └── LICENSE             	   # The LICENSE file
 ```
-
-This structure ensures that:
-- **Security:** Sensitive PHP code remains outside of the public directory.
-- **Modularity:** Files are grouped by function, making the system easier to maintain and scale.
-- **Clarity:** Developers can quickly identify and navigate between different parts of the project.
