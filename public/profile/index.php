@@ -3,7 +3,6 @@
 include_once __DIR__ . "/../../src/repositories/account.php";
 include_once __DIR__ . "/../../src/repositories/product.php";
 include_once __DIR__ . "/../../src/repositories/carts.php";
-include_once __DIR__ . "/../../src/services/login.php";
 include_once __DIR__ . "/../../src/utils/convertor.php";
 
 session_start();
