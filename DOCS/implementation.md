@@ -144,6 +144,7 @@ This section delves into the structure of the database, detailing the tables and
 | ID             | VARCHAR  | Entry identifier (Primary Key)       |
 | CartID         | VARCHAR  | CartsCategory reference (Foreign Key)|
 | ProductID      | VARCHAR  | Product reference (Foreign Key)      |
+| Owner          | VARCHAR  | Account reference (Foreign Key)      |
 
 ### Orders Table
 
