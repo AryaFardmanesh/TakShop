@@ -2,6 +2,7 @@
 
 include_once __DIR__ . "/../../src/repositories/account.php";
 include_once __DIR__ . "/../../src/repositories/product.php";
+include_once __DIR__ . "/../../src/repositories/carts.php";
 include_once __DIR__ . "/../../src/services/login.php";
 include_once __DIR__ . "/../../src/utils/convertor.php";
 
@@ -14,6 +15,7 @@ if ( !isset( $_SESSION[ "token" ] ) || !AccountRepository::isValidToken( $_SESSI
 
 $model = AccountRepository::findByToken( $_SESSION[ "token" ] );
 $ownProducts = ProductRepository::findByUserToken( $_SESSION[ "token" ] );
+$carts = CartsRepository::findByUserToken( $_SESSION[ "token" ] );
 
 $id = $model->id;
 $username = $model->username;
@@ -137,7 +139,6 @@ $isAdmin = $model->role == ACCOUNT_ROLE_ADMIN;
 			<div class="products">
 				<?php
 					if ( $ownProducts != null ) {
-						$ownProductsLen = count( $ownProducts );
 						foreach ( $ownProducts as $value ) {
 							$id = $value[ "id" ];
 							$image = $value[ "image" ];
@@ -174,42 +175,71 @@ $isAdmin = $model->role == ACCOUNT_ROLE_ADMIN;
 		<span class="title">سبد خرید</span>
 
 		<div class="cart">
+			<?php
+				$totalPrice = 0;
+				$cartId = "NULL";
+
+				if ( $carts != null ) {
+					$cartId = $carts[ 0 ][ "cart_id" ];
+					foreach ( $carts as $cart ) {
+						$product = ProductRepository::findById( $cart[ "product_id" ] );
+						$totalPrice += ( $product->price * $cart[ "count" ] );
+					}
+				}
+			?>
+
 			<div class="total-price">
 				<span>قیمت کل:</span>
 				<span class="badge">
-					1,000
+					<?php echo convertPriceToReadableFormat( $totalPrice ); ?>
 					تومان
 				</span>
 			</div>
 
 			<div class="actions">
-				<a href="#">پرداخت</a>
-				<a href="#" class="btn-danger">حذف سبد</a>
+				<a href="./../payment/?cid=<?php echo $cartId; ?>">پرداخت</a>
+				<a href="./../../src/controllers/carts.php?action=CLS&pid=" class="btn-danger">حذف سبد</a>
 			</div>
 
 			<div class="line"></div>
 
 			<div class="products">
+				<?php
+					if ( $carts != null ) {
+						foreach ( $carts as $cart ) {
+							$product = ProductRepository::findById( $cart[ "product_id" ] );
+
+							if ( $product == null ) {
+								continue;
+							}
+
+							$id = $product->id;
+							$image = $product->image;
+							$name = $product->name;
+							$price = $product->price;
+							$count = $cart[ "count" ];
+				?>
 				<div class="product-card">
-					<img src="./../assets/images/logo/logo.png" alt="Product Image." />
-					<span class="pro-name">نام محصول</span>
+					<img src="./../assets/images/products/<?php echo $image; ?>" alt="Product Image." />
+					<span class="pro-name"><?php echo $name; ?></span>
 					<div class="price">
-						<span>1,000</span>
+						<span><?php echo convertPriceToReadableFormat( $price ); ?></span>
 						<span class="badge">تومان</span>
 					</div>
 					<div class="count">
 						<span>تعداد:</span>
-						<span class="badge">1</span>
+						<span class="badge"><?php echo $count; ?></span>
 					</div>
 					<div class="actions">
-						<a href="#">+</a>
-						<a href="#">-</a>
+						<a href="./../../src/controllers/carts.php?action=INC&pid=<?php echo $id; ?>">+</a>
+						<a href="./../../src/controllers/carts.php?action=DEC&pid=<?php echo $id; ?>">-</a>
 					</div>
 					<div class="btns-row">
-						<a href="#" class="btn">مشاهده</a>
-						<a href="#" class="btn-danger">حذف از سبد</a>
+						<a href="./../product/?pid=<?php echo $id; ?>" class="btn">مشاهده</a>
+						<a href="./../../src/controllers/carts.php?action=DEL&pid=<?php echo $id; ?>" class="btn-danger">حذف از سبد</a>
 					</div>
 				</div>
+				<?php } } ?>
 			</div>
 		</div>
 	</div>
