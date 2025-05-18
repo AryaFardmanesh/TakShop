@@ -184,13 +184,22 @@ class CartsRepository {
 		$owner = $carts->owner;
 
 		$resultOwner = $db->execute(
-			"SELECT `cart_id` FROM `carts` WHERE `carts`.`owner` = '$owner';"
+			"SELECT `cart_id`, `product_id` FROM `carts` WHERE `carts`.`owner` = '$owner';"
 		);
 
 		$resultOwnerRow = mysqli_fetch_assoc( $resultOwner );
 		if ( $resultOwnerRow ) {
 			$cartId = $resultOwnerRow[ "cart_id" ];
 		}
+		do {
+			if ( $resultOwnerRow != null && $resultOwnerRow[ "product_id" ] == $productId ) {
+				$db->disconnect();
+				return [
+					'message' => 'این محصول قبلا به سبد خرید اضافه شده است.',
+					'result' => false,
+				];
+			}
+		}while ( $resultOwnerRow = mysqli_fetch_assoc( $resultOwner ) );
 
 		$result = $db->execute(
 			"INSERT INTO `carts` (
