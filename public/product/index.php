@@ -80,9 +80,9 @@ if ( isset( $_SESSION[ "token" ] ) ) {
 				<a href="./../../src/controllers/carts.php?action=ADD&pid=<?php echo $pid; ?>">افزودن به سبد خرید</a>
 				<?php } else { ?>
 				<div>
-					<!-- <a href="#" class="btn-danger">حذف از سبد خرید</a> -->
-					<!-- <a href="#">+</a> -->
-					<!-- <a href="#" class="btn-danger">-</a> -->
+					<a href="#" class="btn-danger">حذف از سبد خرید</a>
+					<a href="#">+</a>
+					<a href="#" class="btn-danger">-</a>
 				</div>
 				<?php } ?>
 			</div>
