@@ -122,6 +122,22 @@ class CartsRepository {
 		return $products;
 	}
 
+	public static function isProductInCarts( string $pid, string $owner ): bool {
+		$db = new Database();
+
+		if ( !$db->connect() ) {
+			return false;
+		}
+
+		$result = $db->execute(
+			"SELECT id FROM `carts` WHERE `carts`.`product_id`='$pid' AND `carts`.`owner`='$owner';"
+		);
+
+		$db->disconnect();
+
+		return ( mysqli_num_rows( $result ) != 0 );
+	}
+
 	public static function create( CartsModel $carts ): array {
 		$db = new Database();
 
