@@ -111,7 +111,7 @@ $isAdmin = $model->role == ACCOUNT_ROLE_ADMIN;
 			$totalCount = count( $ownProducts );
 
 			foreach ( $ownProducts as $product ) {
-				$totalPrice += $product[ "price" ];
+				$totalPrice += ( $product[ "price" ] * $product[ "count" ] );
 			}
 		?>
 
