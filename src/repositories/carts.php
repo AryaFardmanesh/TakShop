@@ -122,6 +122,35 @@ class CartsRepository {
 		return $products;
 	}
 
+	public static function findByProductId( string $id, string $owner ): ?CartsModel {
+		$db = new Database();
+
+		if ( !$db->connect() ) {
+			return null;
+		}
+
+		$result = $db->execute(
+			"SELECT * FROM `carts` WHERE `carts`.`product_id`='$id' AND `carts`.`owner`='$owner';"
+		);
+
+		$db->disconnect();
+
+		if ( mysqli_num_rows( $result ) == 0 ) {
+			return null;
+		}
+
+		$data = mysqli_fetch_assoc( $result );
+		$model = new CartsModel(
+			productId: $data[ "product_id" ],
+			count: $data[ "count" ],
+			owner: $data[ "owner" ],
+		);
+		$model->id = $data[ "id" ];
+		$model->cart_id = $data[ "cart_id" ];
+
+		return $model;
+	}
+
 	public static function isProductInCarts( string $pid, string $owner ): bool {
 		$db = new Database();
 
@@ -142,7 +171,10 @@ class CartsRepository {
 		$db = new Database();
 
 		if ( !$db->connect() ) {
-			return false;
+			return [
+				'message' => 'نمی توان به پایگاه داده متصل شد.',
+				'result' => false,
+			];
 		}
 
 		$id = $carts->id;
@@ -211,7 +243,7 @@ class CartsRepository {
 		];
 	}
 
-	public static function removeProduct( string $id ): bool {
+	public static function removeProduct( string $id, string $owner ): bool {
 		$db = new Database();
 
 		if ( !$db->connect() ) {
@@ -219,7 +251,7 @@ class CartsRepository {
 		}
 
 		$result = $db->execute(
-			"DELETE FROM `carts` WHERE `carts`.`product_id`='$id';"
+			"DELETE FROM `carts` WHERE `carts`.`owner`='$owner' AND `carts`.`product_id`='$id';"
 		);
 
 		$db->disconnect();
@@ -235,7 +267,7 @@ class CartsRepository {
 		}
 
 		$result = $db->execute(
-			"DELETE FROM `carts` WHERE `carts`.`cart_id`='$id';"
+			"DELETE FROM `carts` WHERE `carts`.`owner`='$id';"
 		);
 
 		$db->disconnect();
