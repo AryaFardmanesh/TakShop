@@ -21,12 +21,18 @@ if ( $product == null ) {
 }
 
 $isInCarts = false;
+$cartsCount = 0;
 
 if ( isset( $_SESSION[ "token" ] ) ) {
 	$account = AccountRepository::findByToken( $_SESSION[ "token" ] );
 
 	if ( $account != null ) {
-		$isInCarts = CartsRepository::isProductInCarts( $pid, $account->id );
+		$carts = CartsRepository::findByProductId( $pid, $account->id );
+
+		if ( $carts != null ) {
+			$isInCarts = true;
+			$cartsCount = $carts->count;
+		}
 	}
 }
 
@@ -67,7 +73,7 @@ if ( isset( $_SESSION[ "token" ] ) ) {
 			<?php if ( $isInCarts ) { ?>
 			<div class="total-price">
 				<span>تعداد سفارش شما:</span>
-				<span class="badge">0</span>
+				<span class="badge"><?php echo $cartsCount; ?></span>
 			</div>
 			<?php } ?>
 
@@ -80,9 +86,9 @@ if ( isset( $_SESSION[ "token" ] ) ) {
 				<a href="./../../src/controllers/carts.php?action=ADD&pid=<?php echo $pid; ?>">افزودن به سبد خرید</a>
 				<?php } else { ?>
 				<div>
-					<a href="#" class="btn-danger">حذف از سبد خرید</a>
-					<a href="#">+</a>
-					<a href="#" class="btn-danger">-</a>
+					<a href="./../../src/controllers/carts.php?action=DEL&pid=<?php echo $pid; ?>" class="btn-danger">حذف از سبد خرید</a>
+					<a href="./../../src/controllers/carts.php?action=INC&pid=<?php echo $pid; ?>">+</a>
+					<a href="./../../src/controllers/carts.php?action=DEC&pid=<?php echo $pid; ?>" class="btn-danger">-</a>
 				</div>
 				<?php } ?>
 			</div>
