@@ -176,10 +176,8 @@ $isAdmin = $model->role == ACCOUNT_ROLE_ADMIN;
 		<div class="cart">
 			<?php
 				$totalPrice = 0;
-				$cartId = "NULL";
 
 				if ( $carts != null ) {
-					$cartId = $carts[ 0 ][ "cart_id" ];
 					foreach ( $carts as $cart ) {
 						$product = ProductRepository::findById( $cart[ "product_id" ] );
 						$totalPrice += ( $product->price * $cart[ "count" ] );
@@ -196,7 +194,7 @@ $isAdmin = $model->role == ACCOUNT_ROLE_ADMIN;
 			</div>
 
 			<div class="actions">
-				<a href="./../payment/?cid=<?php echo $cartId; ?>">پرداخت</a>
+				<a href="./../payment/">پرداخت</a>
 				<a href="./../../src/controllers/carts.php?action=CLS&pid=" class="btn-danger">حذف سبد</a>
 			</div>
 
