@@ -18,12 +18,15 @@ $carts = CartsRepository::findByUserToken( $_SESSION[ "token" ] );
 $totalPrice = 0;
 $totalCount = 0;
 
-if ( $carts != null ) {
-	foreach ( $carts as $cart ) {
-		$product = ProductRepository::findById( $cart[ "product_id" ] );
-		$totalPrice += ( $product->price * $cart[ "count" ] );
-		$totalCount++;
-	}
+if ( $carts == null ) {
+	header( "location:./../profile/" );
+	die;
+}
+
+foreach ( $carts as $cart ) {
+	$product = ProductRepository::findById( $cart[ "product_id" ] );
+	$totalPrice += ( $product->price * $cart[ "count" ] );
+	$totalCount++;
 }
 
 $totalPrice = convertPriceToReadableFormat( $totalPrice );

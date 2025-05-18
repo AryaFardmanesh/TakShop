@@ -32,6 +32,32 @@ class CartsRepository {
 		return $cart;
 	}
 
+	public static function findByUserId( string $id ): ?array {
+		$db = new Database();
+
+		if ( !$db->connect() ) {
+			return null;
+		}
+
+		$result = $db->execute(
+			"SELECT * FROM `carts` WHERE `carts`.`owner`='$id';"
+		);
+
+		$db->disconnect();
+
+		if ( mysqli_num_rows( $result ) == 0 ) {
+			return null;
+		}
+
+		$cart = [];
+
+		while ( $row = mysqli_fetch_assoc( $result ) ) {
+			array_push( $cart, $row );
+		}
+
+		return $cart;
+	}
+
 	public static function findByUserToken( string $token ): ?array {
 		$account = AccountRepository::findByToken( $token );
 

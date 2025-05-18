@@ -7,6 +7,7 @@ include_once __DIR__ . "/../utils/back.php";
 
 session_start();
 
+define( 'CARTS_ACTION_BUY', 'BUY' );
 define( 'CARTS_ACTION_ADD', 'ADD' );
 define( 'CARTS_ACTION_DEL', 'DEL' );
 define( 'CARTS_ACTION_CLS', 'CLS' );
@@ -27,7 +28,27 @@ if ( $account == null ) {
 
 $product = ProductRepository::findById( $pid );
 
-if ( $action == CARTS_ACTION_ADD ) {
+if ( $action == CARTS_ACTION_BUY ) {
+	$carts = CartsRepository::findByUserId( $account->id );
+
+	if ( $carts == null ) {
+		back();
+	}
+
+	foreach ( $carts as $cart ) {
+		$product = ProductRepository::findById( $cart[ "product_id" ] );
+		if ( ( $product->count - $cart[ "count" ] ) < 0 ) {
+			$product->count = 0;
+		}else {
+			$product->count -= $cart[ "count" ];
+		}
+		ProductRepository::update( $product );
+	}
+
+	CartsRepository::removeCart( $account->id );
+
+	back();
+}else if ( $action == CARTS_ACTION_ADD ) {
 	$count = 1;
 
 	if ( isset( $_REQUEST[ "count" ] ) ) {
