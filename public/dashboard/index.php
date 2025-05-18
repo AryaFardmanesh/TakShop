@@ -51,8 +51,6 @@ $allUsers = AccountRepository::getAllUser() ?? [];
 
 	<div class="sidebar">
 		<button tid="allUsers" class="active">کاربران</button>
-		<button tid="orders">سفارشات</button>
-		<button tid="financial">مالی</button>
 		<button tid="docs">مستندات</button>
 	</div>
 
@@ -125,66 +123,6 @@ $allUsers = AccountRepository::getAllUser() ?? [];
 			</tr>
 			<?php } ?>
 		</table>
-	</section>
-
-	<!-- Orders Section -->
-	<section id="orders" class="tab activex">
-		<h1>لیست تمامی سفارشات</h1>
-
-		<table class="user-table">
-			<tr>
-				<th>#</th>
-				<th>شناسه</th>
-				<th>شناسه سبد</th>
-				<th>قیمت کل</th>
-				<th>وضعیت</th>
-			</tr>
-
-			<tr>
-				<td>1</td>
-				<td>012345</td>
-				<td>912891</td>
-				<td>
-					<span class="badge">
-						1,000
-						تومان
-					</span>
-				</td>
-				<td>
-					<span class="badge">آماده</span>
-				</td>
-			</tr>
-		</table>
-	</section>
-
-	<!-- Financial Section -->
-	<section id="financial" class="tab activex">
-		<h1>مالی</h1>
-
-		<div class="card">
-			<div>
-				<span>درآمد کل:</span>
-				<span class="badge">
-					1,000
-					تومان
-				</span>
-			</div>
-			<div>
-				<span>تعداد کل کالا ها:</span>
-				<span class="badge">100</span>
-			</div>
-			<div>
-				<span>قیمت کل کالا ها:</span>
-				<span class="badge">
-					1,000
-					تومان
-				</span>
-			</div>
-			<div>
-				<span>تعداد کالا های فروخته شده:</span>
-				<span class="badge">100</span>
-			</div>
-		</div>
 	</section>
 
 	<!-- Docs Section -->
