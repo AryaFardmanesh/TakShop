@@ -14,8 +14,13 @@ define( 'CARTS_ACTION_CLS', 'CLS' );
 define( 'CARTS_ACTION_INC', 'INC' );
 define( 'CARTS_ACTION_DEC', 'DEC' );
 
-if ( !isset( $_REQUEST[ "action" ] ) || !isset( $_REQUEST[ "pid" ] ) || !isset( $_SESSION[ "token" ] ) ) {
+if ( !isset( $_REQUEST[ "action" ] ) || !isset( $_REQUEST[ "pid" ] ) ) {
 	back();
+}
+
+if ( !isset( $_SESSION[ "token" ] ) ) {
+	header( "location:./../../public/login/" );
+	die;
 }
 
 $account = AccountRepository::findByToken( $_SESSION[ "token" ] );
@@ -23,7 +28,8 @@ $action = $_REQUEST[ "action" ];
 $pid = $_REQUEST[ "pid" ];
 
 if ( $account == null ) {
-	back();
+	header( "location:./../../public/login/" );
+	die;
 }
 
 $product = ProductRepository::findById( $pid );
