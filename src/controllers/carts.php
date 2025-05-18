@@ -22,8 +22,7 @@ $action = $_REQUEST[ "action" ];
 $pid = $_REQUEST[ "pid" ];
 
 if ( $account == null ) {
-	header( "location:./../../public/product/?pid=$pid" );
-	die;
+	back();
 }
 
 $product = ProductRepository::findById( $pid );
@@ -43,32 +42,27 @@ if ( $action == CARTS_ACTION_ADD ) {
 
 	CartsRepository::create( $model );
 
-	header( "location:./../../public/product/?pid=$pid" );
-	die;
+	back();
 }else if ( $action == CARTS_ACTION_DEL ) {
 	CartsRepository::removeProduct( $pid, $account->id );
-	header( "location:./../../public/product/?pid=$pid" );
-	die;
+	back();
 }else if ( $action == CARTS_ACTION_CLS ) {
 	CartsRepository::removeCart( $account->id );
-	header( "location:./../../public/product/?pid=$pid" );
-	die;
+	back();
 }else if ( $action == CARTS_ACTION_INC ) {
 	$carts = CartsRepository::findByProductId( $pid, $account->id );
 	if ( $product != null && $product->count >= ( $carts->count + 1 ) ) {
 		$carts->count++;
 		CartsRepository::update( $carts );
 	}
-	header( "location:./../../public/product/?pid=$pid" );
-	die;
+	back();
 }else if ( $action == CARTS_ACTION_DEC ) {
 	$carts = CartsRepository::findByProductId( $pid, $account->id );
 	if ( ( $carts->count - 1 ) > 0 ) {
 		$carts->count--;
 		CartsRepository::update( $carts );
 	}
-	header( "location:./../../public/product/?pid=$pid" );
-	die;
+	back();
 }
 
 back();
