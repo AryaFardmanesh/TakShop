@@ -1,7 +1,11 @@
 <?php
 
 include_once __DIR__ . "/../../src/repositories/product.php";
+include_once __DIR__ . "/../../src/repositories/account.php";
+include_once __DIR__ . "/../../src/repositories/carts.php";
 include_once __DIR__ . "/../../src/utils/convertor.php";
+
+session_start();
 
 if ( !isset( $_REQUEST[ "pid" ] ) ) {
 	header( "location:./../index/" );
@@ -14,6 +18,16 @@ $product = ProductRepository::findById( $pid );
 if ( $product == null ) {
 	header( "location:./../index/" );
 	die;
+}
+
+$isInCarts = false;
+
+if ( isset( $_SESSION[ "token" ] ) ) {
+	$account = AccountRepository::findByToken( $_SESSION[ "token" ] );
+
+	if ( $account != null ) {
+		$isInCarts = CartsRepository::isProductInCarts( $pid, $account->id );
+	}
 }
 
 ?>
@@ -50,22 +64,27 @@ if ( $product == null ) {
 				<span class="badge"><?php echo $product->count; ?></span>
 			</div>
 
-			<!-- <div class="total-price">
+			<?php if ( $isInCarts ) { ?>
+			<div class="total-price">
 				<span>تعداد سفارش شما:</span>
 				<span class="badge">0</span>
-			</div> -->
+			</div>
+			<?php } ?>
 
 			<div class="product-img">
 				<img src="./../assets/images/products/<?php echo $product->image; ?>" alt="Product Image." />
 			</div>
 
 			<div class="actions">
-				<a href="#">افزودن به سبد خرید</a>
+				<?php if ( !$isInCarts ) { ?>
+				<a href="./../../src/controllers/carts.php?action=ADD&pid=<?php echo $pid; ?>">افزودن به سبد خرید</a>
+				<?php } else { ?>
 				<div>
 					<!-- <a href="#" class="btn-danger">حذف از سبد خرید</a> -->
 					<!-- <a href="#">+</a> -->
 					<!-- <a href="#" class="btn-danger">-</a> -->
 				</div>
+				<?php } ?>
 			</div>
 		</div>
 	</div>
